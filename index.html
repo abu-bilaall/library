@@ -21,45 +21,58 @@
                 <p>Add a Book</p>
             </div>
 
+            <dialog>
+                <p>Add a new book</p>
+                <form action="">
+                    <input type="text" id="title" name="title" placeholder="Title">
+                    <input type="text" id="author" name="author" placeholder="Author">
+                    <input type="text" id="pages" name="pages" placeholder="Pages">
+                    <label for="read-status">Have you read it?</label>
+                    <input type="checkbox" name="read-status" id="read-status">
+                    <button class="close-dialog">Dismiss</button>
+                    <button class="add-new-book">Add</button>
+                </form>
+            </dialog>
+
             <div class="books-table">
                 <table>
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Pages</th>
-                            <th>Status</th>
+                            <th>TITLE</th>
+                            <th>AUTHOR</th>
+                            <th>PAGES</th>
+                            <th>STATUS</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>the Hobbit</td>
-                            <td>JRR Tolkien</td>
+                            <td class="book-title">the Hobbit</td>
+                            <td class="book-author">JRR Tolkien</td>
                             <td>295</td>
                             <td>Read</td>
                             <td><img src="./images/delete.svg" alt="delete"></td>
                         </tr>
 
                         <tr>
-                            <td>Things fall apart</td>
-                            <td>Chinua Achebe</td>
+                            <td class="book-title">Things fall apart</td>
+                            <td class="book-author">Chinua Achebe</td>
                             <td>355</td>
                             <td>Not Read</td>
                             <td><img src="./images/delete.svg" alt="delete"></td>
                         </tr>
 
                         <tr>
-                            <td>the Hobbit</td>
-                            <td>JRR Tolkien</td>
+                            <td class="book-title">the Hobbit</td>
+                            <td class="book-author">JRR Tolkien</td>
                             <td>295</td>
                             <td>Read</td>
                             <td><img src="./images/delete.svg" alt="delete"></td>
                         </tr>
 
                         <tr>
-                            <td>Things fall apart</td>
-                            <td>Chinua Achebe</td>
+                            <td class="book-title">Things fall apart</td>
+                            <td class="book-author">Chinua Achebe</td>
                             <td>355</td>
                             <td>Not Read</td>
                             <td><img src="./images/delete.svg" alt="delete"></td>
