@@ -24,15 +24,15 @@
             <dialog>
                 <p>Add a new book</p>
                 <form action="">
-                    <input type="text" id="title" name="title" placeholder="Title">
-                    <input type="text" id="author" name="author" placeholder="Author">
-                    <input type="text" id="pages" name="pages" placeholder="Pages">
+                    <input type="text" id="title" name="title" placeholder="Title" required>
+                    <input type="text" id="author" name="author" placeholder="Author" required>
+                    <input type="text" id="pages" name="pages" placeholder="Pages" required>
                     <div class="read-status">
                         <label for="read-status">Have you read it?</label>
-                        <input type="checkbox" name="read-status" id="read-status">
+                        <input type="checkbox" name="read-status" id="read-status" required>
                     </div>
                     <div class="buttons">
-                        <button class="close-dialog">Dismiss</button>
+                        <button class="close-dialog" value="dismiss" formmethod="dialog" formnovalidate>Dismiss</button>
                         <button class="add-new-book">Add</button>
                     </div>
                 </form>

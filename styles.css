@@ -85,12 +85,16 @@ tbody tr:nth-child(even) {
 
 dialog {
     padding: 14px;
+    width: 300px;
+    /* height: 300px; */
+    border-radius: 8px;
+    border: none;
 }
 
 dialog p {
     text-align: center;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin: 0;
     margin-bottom: 8px;
 }
@@ -105,11 +109,17 @@ input[type="text"] {
     border: 1px solid #FF9800;
     padding: 8px;
     border-radius: 4px;
+    height: 30px;
 }
 
 input[type="text"]:focus {
     border-color: #388e3c;
     outline: none;
+}
+
+input[type="text"]::placeholder {
+    font-size: 16px;
+    font-style: italic;
 }
 
 .buttons,
@@ -118,7 +128,7 @@ input[type="text"]:focus {
 }
 
 .read-status {
-    font-size: 18px;
+    font-size: 1.2rem;
 }
 
 .buttons > button {
