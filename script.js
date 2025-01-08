@@ -15,3 +15,14 @@ function addBookToLibrary (title, author, pages, read) {
     let book = new Book(title, author, pages, read);
     myLibrary.push(book);
 }
+
+addBookToLibrary("the Hobbit", "J.R.R Tolkien", 295, "not read yet");
+addBookToLibrary("The Mountain Is You", "Brianna West", 355, "not read yet");
+
+function displayBook (library) {
+    for (book of library) {
+        console.log(book);
+    }
+}
+
+displayBook(myLibrary);
