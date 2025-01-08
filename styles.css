@@ -19,6 +19,7 @@ body {
 article {
     flex: auto;
 }
+
 footer {
     text-align: center;
     font-size: 1rem;
@@ -43,4 +44,35 @@ header {
     font-weight: 700;
     cursor: pointer;
     color: rgb(0, 36, 0);
+}
+
+
+.books-table {
+    display: flex;
+    justify-content: center;
+}
+
+th,
+td {
+    padding: 8px;
+}
+
+th {
+    color: white;
+    background-color: #388e3c;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 5;
+    width: 50vw;
+}
+
+tbody tr {
+    background-color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9fbe7;
 }
