@@ -27,7 +27,7 @@ addBookBtn.addEventListener("click", (event) => {
     let title = bookTitle.value.trim();
     let author = bookAuthor.value.trim();
     let pages = bookPages.value.trim();
-    let readStatus = bookReadStatus.checked ? "Read" : "Not Read";
+    let readStatus = bookReadStatus.checked;
 
     // input validation
     if (!title || !author || !pages || isNaN(pages)) {
@@ -54,9 +54,14 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.readStatus = read ? "Read" : "Not Read";
 
     this.info = function () {
         return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
+    }
+
+    this.updateReadStatus = function () {
+        this.readStatus = !read ? "Read" : "Not Read";
     }
 }
 
@@ -66,10 +71,10 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 // testing..
-addBookToLibrary("the Hobbit", "J.R.R Tolkien", 295, "not read yet");
-addBookToLibrary("The Mountain Is You", "Brianna West", 355, "not read yet");
-addBookToLibrary("the Hobbit", "J.R.R Tolkien", 295, "not read yet");
-addBookToLibrary("The Mountain Is You", "Brianna West", 355, "not read yet");
+addBookToLibrary("the Hobbit", "J.R.R Tolkien", 295, true);
+addBookToLibrary("The Mountain Is You", "Brianna West", 355, false);
+addBookToLibrary("the Hobbit", "J.R.R Tolkien", 295, false);
+addBookToLibrary("The Mountain Is You", "Brianna West", 355, true);
 
 function createTableRow (titleContent, authorContent, pagesContent, readStatusContent) {
     let row = document.createElement("tr");
@@ -100,7 +105,7 @@ function displayBook(library) {
     let tableBody = document.querySelector("tbody");
 
     for (book of library) {
-        let row = createTableRow(book.title, book.author, book.pages, book.read);
+        let row = createTableRow(book.title, book.author, book.pages, book.readStatus);
         row.setAttribute("data-index", library.indexOf(book));
         tableBody.appendChild(row);
     }
