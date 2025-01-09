@@ -66,9 +66,36 @@ function addBookToLibrary(title, author, pages, read) {
 addBookToLibrary("the Hobbit", "J.R.R Tolkien", 295, "not read yet");
 addBookToLibrary("The Mountain Is You", "Brianna West", 355, "not read yet");
 
+function createTableRow (titleContent, authorContent, pagesContent, readStatusContent) {
+    let row = document.createElement("tr");
+    let title = document.createElement("td");
+    let author = document.createElement("td");
+    let pages = document.createElement("td");
+    let readStatus = document.createElement("td");
+    let deleteBtn = document.createElement("td");
+    let deleteIcon = document.createElement("img");
+
+    title.textContent = titleContent;
+    author.textContent = authorContent;
+    pages.textContent = pagesContent;
+    readStatus.textContent = readStatusContent;
+
+    deleteIcon.setAttribute("src", "./images/delete.svg");
+    deleteIcon.setAttribute("alt", "delete");
+
+    deleteBtn.appendChild(deleteIcon);
+
+    row.append(title, author, pages, readStatus, deleteBtn);
+    return row;
+
+}
+
 function displayBook(library) {
+    let tableBody = document.querySelector("tbody");
+
     for (book of library) {
-        console.log(book);
+        let row = createTableRow(book.title, book.author, book.pages, book.read);
+        tableBody.appendChild(row);
     }
 }
 
