@@ -54,14 +54,16 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.readStatus = read ? "Read" : "Not Read";
+    this.readStatus = read ? "Read ✅" : "Not Read ❌";
 
     this.info = function () {
         return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
     }
 
     this.updateReadStatus = function () {
-        this.readStatus = !read ? "Read" : "Not Read";
+        this.read = !this.read;
+        this.readStatus = this.read ? "Read ✅" : "Not Read ❌";
+        return this.readStatus;
     }
 }
 
@@ -76,7 +78,7 @@ addBookToLibrary("The Mountain Is You", "Brianna West", 355, false);
 addBookToLibrary("the Hobbit", "J.R.R Tolkien", 295, false);
 addBookToLibrary("The Mountain Is You", "Brianna West", 355, true);
 
-function createTableRow (titleContent, authorContent, pagesContent, readStatusContent) {
+function createTableRow(titleContent, authorContent, pagesContent, readStatusContent) {
     let row = document.createElement("tr");
     let title = document.createElement("td");
     let author = document.createElement("td");
@@ -89,6 +91,9 @@ function createTableRow (titleContent, authorContent, pagesContent, readStatusCo
     author.textContent = authorContent;
     pages.textContent = pagesContent;
     readStatus.textContent = readStatusContent;
+
+    readStatus.setAttribute("class", "read-state");
+    readStatus.setAttribute("title", "Toggle Read Status");
 
     deleteIcon.setAttribute("src", "./images/delete.svg");
     deleteIcon.setAttribute("alt", "delete");
@@ -114,6 +119,7 @@ function displayBook(library) {
 displayBook(myLibrary);
 
 const deleteBtns = document.querySelectorAll(".delete-btn");
+const readStateBtns = document.querySelectorAll(".read-state");
 
 deleteBtns.forEach(button => {
     button.addEventListener("click", () => {
@@ -122,3 +128,10 @@ deleteBtns.forEach(button => {
         button.parentElement.remove();
     });
 });
+
+readStateBtns.forEach(button => {
+    button.addEventListener("click", () => {
+        let index = button.parentElement.dataset.index;
+        button.textContent = myLibrary[index].updateReadStatus();
+    })
+})
