@@ -15,6 +15,7 @@ if (!dialog || !addNewBook || !addBookBtn || !bookTitle || !bookAuthor || !bookP
     console.error("One or more DOM elements could not be found. Check selectors.");
 }
 
+// event listeners
 addNewBook.addEventListener("click", () => {
     dialog.showModal();
 });
@@ -47,6 +48,7 @@ addBookBtn.addEventListener("click", (event) => {
     bookReadStatus.checked = false;
 })
 
+// the Book constructor
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -63,6 +65,9 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(book);
 }
 
+// testing..
+addBookToLibrary("the Hobbit", "J.R.R Tolkien", 295, "not read yet");
+addBookToLibrary("The Mountain Is You", "Brianna West", 355, "not read yet");
 addBookToLibrary("the Hobbit", "J.R.R Tolkien", 295, "not read yet");
 addBookToLibrary("The Mountain Is You", "Brianna West", 355, "not read yet");
 
@@ -83,6 +88,7 @@ function createTableRow (titleContent, authorContent, pagesContent, readStatusCo
     deleteIcon.setAttribute("src", "./images/delete.svg");
     deleteIcon.setAttribute("alt", "delete");
 
+    deleteBtn.setAttribute("class", "delete-btn");
     deleteBtn.appendChild(deleteIcon);
 
     row.append(title, author, pages, readStatus, deleteBtn);
@@ -95,8 +101,19 @@ function displayBook(library) {
 
     for (book of library) {
         let row = createTableRow(book.title, book.author, book.pages, book.read);
+        row.setAttribute("data-index", library.indexOf(book));
         tableBody.appendChild(row);
     }
 }
 
 displayBook(myLibrary);
+
+const deleteBtns = document.querySelectorAll(".delete-btn");
+
+deleteBtns.forEach(button => {
+    button.addEventListener("click", () => {
+        let index = button.parentElement.dataset.index;
+        myLibrary.splice(index, 1);
+        button.parentElement.remove();
+    });
+});
