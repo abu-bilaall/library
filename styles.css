@@ -78,6 +78,11 @@ tbody tr:nth-child(even) {
     border-bottom: 1px solid #333;
 }
 
+tr td:nth-child(1), 
+tr td:nth-child(2) {
+    font-weight: 700;
+}
+
 .book-title,
 .book-author {
     font-weight: 700;
