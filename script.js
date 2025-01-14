@@ -35,6 +35,10 @@ addBookBtn.addEventListener("click", (event) => {
         return;
     }
 
+    // updating page
+    let newBook = new Book(title, author, pages, readStatus);
+    displayBook(newBook, myLibrary);
+
     // updating myLibrary
     addBookToLibrary(title, author, pages, readStatus);
 
@@ -107,6 +111,12 @@ function createTableRow(titleContent, authorContent, pagesContent, readStatusCon
 }
 
 let tableBody = document.querySelector("tbody");
+
+function displayBook(book, library) {
+    let row = createTableRow(book.title, book.author, book.pages, book.readStatus);
+    row.setAttribute("data-index", myLibrary.length);
+    tableBody.appendChild(row);
+}
 
 function displayBooks(library) {
     for (book of library) {
