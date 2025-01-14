@@ -73,10 +73,10 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 // testing..
-addBookToLibrary("the Hobbit", "J.R.R Tolkien", 295, true);
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
 addBookToLibrary("The Mountain Is You", "Brianna West", 355, false);
-addBookToLibrary("the Hobbit", "J.R.R Tolkien", 295, false);
-addBookToLibrary("The Mountain Is You", "Brianna West", 355, true);
+addBookToLibrary("Things Fall Apart", "Chinua Achebe", 209, false);
+addBookToLibrary("Pro Git", "Scott Chacon and Ben Straub ", 501, true);
 
 function createTableRow(titleContent, authorContent, pagesContent, readStatusContent) {
     let row = document.createElement("tr");
@@ -106,9 +106,9 @@ function createTableRow(titleContent, authorContent, pagesContent, readStatusCon
 
 }
 
-function displayBook(library) {
-    let tableBody = document.querySelector("tbody");
+let tableBody = document.querySelector("tbody");
 
+function displayBooks(library) {
     for (book of library) {
         let row = createTableRow(book.title, book.author, book.pages, book.readStatus);
         row.setAttribute("data-index", library.indexOf(book));
@@ -116,22 +116,19 @@ function displayBook(library) {
     }
 }
 
-displayBook(myLibrary);
+displayBooks(myLibrary);
 
-const deleteBtns = document.querySelectorAll(".delete-btn");
-const readStateBtns = document.querySelectorAll(".read-state");
-
-deleteBtns.forEach(button => {
-    button.addEventListener("click", () => {
-        let index = button.parentElement.dataset.index;
+tableBody.addEventListener("click", (event) => {
+    // Handle delete button clicks
+    if (event.target.parentElement.classList.contains("delete-btn")) {
+        let index = event.target.closest('td').parentElement.dataset.index;
         myLibrary.splice(index, 1);
-        button.parentElement.remove();
-    });
-});
+        event.target.closest('td').parentElement.remove();
+    }
 
-readStateBtns.forEach(button => {
-    button.addEventListener("click", () => {
-        let index = button.parentElement.dataset.index;
-        button.textContent = myLibrary[index].updateReadStatus();
-    })
-})
+    // Handle read state button clicks
+    if (event.target.classList.contains("read-state")) {
+        let index = event.target.parentElement.dataset.index;
+        event.target.textContent = myLibrary[index].updateReadStatus();
+    }
+});
