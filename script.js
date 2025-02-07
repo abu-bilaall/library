@@ -78,25 +78,6 @@ addBookBtn.addEventListener("click", (event) => {
     bookReadStatus.checked = false;
 })
 
-// the Book constructor
-// function Book(title, author, pages, read) {
-//     this.title = title;
-//     this.author = author;
-//     this.pages = pages;
-//     this.read = read;
-//     this.readStatus = read ? "Read ✅" : "Not Read ❌";
-
-//     this.info = function () {
-//         return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-//     }
-
-//     this.updateReadStatus = function () {
-//         this.read = !this.read;
-//         this.readStatus = this.read ? "Read ✅" : "Not Read ❌";
-//         return this.readStatus;
-//     }
-// }
-
 // testing..
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
 addBookToLibrary("The Mountain Is You", "Brianna West", 355, false);
