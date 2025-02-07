@@ -1,5 +1,31 @@
 const myLibrary = [];
 
+// Book Class
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.readStatus = read ? "Read ✅" : "Not Read ❌";
+    }
+
+    info () {
+        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
+    }
+
+    updateReadStatus () {
+        this.read = !this.read;
+        this.readStatus = this.read ? "Read ✅" : "Not Read ❌";
+        return this.readStatus;
+    }
+}
+
+function addBookToLibrary(title, author, pages, read) {
+    let book = new Book(title, author, pages, read);
+    myLibrary.push(book);
+}
+
 // element selection and assignment
 const dialog = document.querySelector("dialog");
 const addNewBook = document.querySelector(".add-book");
@@ -53,28 +79,23 @@ addBookBtn.addEventListener("click", (event) => {
 })
 
 // the Book constructor
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.readStatus = read ? "Read ✅" : "Not Read ❌";
+// function Book(title, author, pages, read) {
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.read = read;
+//     this.readStatus = read ? "Read ✅" : "Not Read ❌";
 
-    this.info = function () {
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-    }
+//     this.info = function () {
+//         return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
+//     }
 
-    this.updateReadStatus = function () {
-        this.read = !this.read;
-        this.readStatus = this.read ? "Read ✅" : "Not Read ❌";
-        return this.readStatus;
-    }
-}
-
-function addBookToLibrary(title, author, pages, read) {
-    let book = new Book(title, author, pages, read);
-    myLibrary.push(book);
-}
+//     this.updateReadStatus = function () {
+//         this.read = !this.read;
+//         this.readStatus = this.read ? "Read ✅" : "Not Read ❌";
+//         return this.readStatus;
+//     }
+// }
 
 // testing..
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
