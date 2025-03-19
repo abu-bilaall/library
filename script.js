@@ -8,6 +8,7 @@ class Book {
         this.pages = pages;
         this.read = read;
         this.readStatus = read ? "Read ✅" : "Not Read ❌";
+        this.id = crypto.randomUUID();
     }
 
     info () {
@@ -114,16 +115,16 @@ function createTableRow(titleContent, authorContent, pagesContent, readStatusCon
 
 let tableBody = document.querySelector("tbody");
 
-function displayBook(book, library) {
+function displayBook(book) {
     let row = createTableRow(book.title, book.author, book.pages, book.readStatus);
-    row.setAttribute("data-index", myLibrary.length);
+    row.setAttribute("data-id", book.id);
     tableBody.appendChild(row);
 }
 
 function displayBooks(library) {
     for (book of library) {
         let row = createTableRow(book.title, book.author, book.pages, book.readStatus);
-        row.setAttribute("data-index", library.indexOf(book));
+        row.setAttribute("data-id", book.id);
         tableBody.appendChild(row);
     }
 }
@@ -133,14 +134,16 @@ displayBooks(myLibrary);
 tableBody.addEventListener("click", (event) => {
     // Handle delete button clicks
     if (event.target.parentElement.classList.contains("delete-btn")) {
-        let index = event.target.closest('td').parentElement.dataset.index;
+        let id = event.target.closest('td').parentElement.dataset.id;
+        let index = myLibrary.findIndex((book) => book.id === id);
         myLibrary.splice(index, 1);
         event.target.closest('td').parentElement.remove();
     }
 
     // Handle read state button clicks
     if (event.target.classList.contains("read-state")) {
-        let index = event.target.parentElement.dataset.index;
+        let id = event.target.parentElement.dataset.id;
+        let index = myLibrary.findIndex((book) => book.id === id);
         event.target.textContent = myLibrary[index].updateReadStatus();
     }
 });
