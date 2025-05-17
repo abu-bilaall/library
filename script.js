@@ -5,7 +5,7 @@ class Book {
     constructor(title, author, pages, read) {
         this.title = title;
         this.author = author;
-        this.pages = pages;
+        this.pages = Number(pages);
         this.read = read;
         this.readStatus = read ? "Read ✅" : "Not Read ❌";
         this.id = crypto.randomUUID();
@@ -22,9 +22,8 @@ class Book {
     }
 }
 
-function addBookToLibrary(title, author, pages, read) {
-    let book = new Book(title, author, pages, read);
-    myLibrary.push(book);
+function addBookToLibrary(newBook) {
+    myLibrary.push(newBook);
 }
 
 // element selection and assignment
@@ -53,7 +52,7 @@ addBookBtn.addEventListener("click", (event) => {
     // value-housekeeping..
     let title = bookTitle.value.trim();
     let author = bookAuthor.value.trim();
-    let pages = bookPages.value.trim();
+    let pages = Number(bookPages.value.trim());
     let readStatus = bookReadStatus.checked;
 
     // input validation
@@ -64,10 +63,10 @@ addBookBtn.addEventListener("click", (event) => {
 
     // updating page
     let newBook = new Book(title, author, pages, readStatus);
-    displayBook(newBook, myLibrary);
+    displayBook(newBook);
 
     // updating myLibrary
-    addBookToLibrary(title, author, pages, readStatus);
+    addBookToLibrary(newBook);
 
     // close dialog
     dialog.close();
@@ -80,12 +79,17 @@ addBookBtn.addEventListener("click", (event) => {
 })
 
 // testing..
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
-addBookToLibrary("The Mountain Is You", "Brianna West", 355, false);
-addBookToLibrary("Things Fall Apart", "Chinua Achebe", 209, false);
-addBookToLibrary("Pro Git", "Scott Chacon and Ben Straub ", 501, true);
+const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
+const theMountain = new Book("The Mountain Is You", "Brianna West", 355, false)
+const thingsFallApart = new Book("Things Fall Apart", "Chinua Achebe", 209, false);
+const proGit = new Book("Pro Git", "Scott Chacon and Ben Straub ", 501, true);
 
-function createTableRow(titleContent, authorContent, pagesContent, readStatusContent) {
+addBookToLibrary(theHobbit);
+addBookToLibrary(theMountain);
+addBookToLibrary(thingsFallApart);
+addBookToLibrary(proGit);
+
+function createTableRow(book) {
     let row = document.createElement("tr");
     let title = document.createElement("td");
     let author = document.createElement("td");
@@ -94,10 +98,10 @@ function createTableRow(titleContent, authorContent, pagesContent, readStatusCon
     let deleteBtn = document.createElement("td");
     let deleteIcon = document.createElement("img");
 
-    title.textContent = titleContent;
-    author.textContent = authorContent;
-    pages.textContent = pagesContent;
-    readStatus.textContent = readStatusContent;
+    title.textContent = book.title;
+    author.textContent = book.author;
+    pages.textContent = book.pages;
+    readStatus.textContent = book.readStatus;
 
     readStatus.setAttribute("class", "read-state");
     readStatus.setAttribute("title", "Toggle Read Status");
@@ -116,14 +120,14 @@ function createTableRow(titleContent, authorContent, pagesContent, readStatusCon
 let tableBody = document.querySelector("tbody");
 
 function displayBook(book) {
-    let row = createTableRow(book.title, book.author, book.pages, book.readStatus);
+    let row = createTableRow(book);
     row.setAttribute("data-id", book.id);
     tableBody.appendChild(row);
 }
 
 function displayBooks(library) {
     for (book of library) {
-        let row = createTableRow(book.title, book.author, book.pages, book.readStatus);
+        let row = createTableRow(book);
         row.setAttribute("data-id", book.id);
         tableBody.appendChild(row);
     }
